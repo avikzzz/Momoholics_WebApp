@@ -1,0 +1,63 @@
+<div class="container">
+  <h1> Sign Up </h1>
+  <form [formGroup]="registerForm" (ngSubmit)="SubmitRegistration(registerForm)" >
+    <div class="form-group">
+      <label> Name </label>
+      <input type="text" class="form-control" formControlName="custName" />
+      <p *ngIf="registerForm.controls['custName'].errors?.['required'] && registerForm.controls['custName'].touched" class="alert alert-danger">This field is required !</p>
+    </div>
+    <div class="form-group">
+      <label>Gender</label>
+      <br />
+      <label>Male</label>&nbsp;
+      <input type="radio" formControlName="gender" name="gender" value="M" />&nbsp;&nbsp;<br />
+      <label> Female </label>&nbsp;
+      <input type="radio" formControlName="gender" name="gender" value="F" />&nbsp;&nbsp;<br />
+      <label>Do not want to Specify</label>&nbsp;
+      <input type="radio" formControlName="gender" name="gender" value="NA" />
+      <p *ngIf="registerForm.controls['gender'].errors?.['required'] && registerForm.controls['gender'].touched" class="alert alert-danger">This field is required !</p>
+    </div>
+    <br />
+    <div class="form-group">
+      <div>
+        <label>Age</label>
+      </div>
+      <input type="number" formControlName="age" r />
+      <p *ngIf="registerForm.controls['age'].errors?.['required'] && registerForm.controls['age'].touched" class="alert alert-danger">This field is required !</p>
+    </div>
+    <div class="form-group">
+      <label>Address</label>
+      <div>
+        <input type="text" formControlName="custAddress" class="form-control" />
+        <p *ngIf="registerForm.controls['custAddress'].errors?.['required'] && registerForm.controls['custAddress'].touched" class="alert alert-danger">This field is required !</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Contact Number</label>
+      <input type="text" formControlName="phoneNumber" class="form-control" />
+      <p *ngIf="registerForm.controls['phoneNumber'].errors?.['required'] && registerForm.controls['phoneNumber'].touched" class="alert alert-danger">This field is required !</p>
+    </div>
+    <div class="form-group">
+      <div>
+        <label>Email Id</label>
+      </div>
+      <input type="email" class="form-control" formControlName="emailId" />
+      <p *ngIf="registerForm.controls['emailId'].errors?.['required'] && registerForm.controls['emailId'].touched" class="alert alert-danger">This field is required !</p>
+      <p *ngIf="registerForm.controls['emailId'].errors?.['minlength'] &&  registerForm.controls['emailId'].touched" class="alert alert-danger">The EmailId is not proper!</p>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" class="form-control" formControlName="password" />
+      <p *ngIf="registerForm.controls['password'].errors?.['required'] && registerForm.controls['password'].touched" class="alert alert-danger">This field is required !</p>
+    </div>
+    <br />
+    <button type="submit" class="button"> Sign Up </button>
+    <br />
+  </form>
+<div>
+  <div *ngIf="showMsgDiv" style="color:orangered; text-align:center;">
+    <br />
+    {{msg}}
+  </div>
+  <br />
+</div>

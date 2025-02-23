@@ -1,0 +1,51 @@
+
+<div class="container">
+  <form #loginForm="ngForm" (ngSubmit)="submitLoginForm(loginForm)" class="background">
+    <div class="row">
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4">
+        <h2 style="font-style:italic">Login</h2>
+        <h6 style="text-align:right;color:palevioletred; font-size:small">
+          All fields are mandatory
+        </h6>
+        <div class="form-group">
+          <div class="col" style="text-align:left">
+            <label>Email Id</label>
+          </div>
+          <div class="col; input-group">
+            <input type="email" name="email" #emailRef="ngModel" class="form-control" ngModel required />
+          </div>
+        </div>
+        <div style="text-align:left; padding-top:5px; color:red;">
+          <div [hidden]="emailRef.valid || passRef.pristine">
+            <p style="font-size:12px">Email Id is Mandatory to get your dish COOKED...</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col" style="text-align:left">
+            <label>Password</label>
+          </div> 
+          <div class="col; input-group">
+            <input type="password" name="password" #passRef="ngModel" class="form-control" ngModel required/>
+          </div>
+        </div>
+        <div style="text-align:left; padding:5px; color:red">
+          <div [hidden]="passRef.valid || passRef.pristine">
+            <p style="font-size:12px">Password is Mandatory to get your dish READY...</p>
+          </div>
+        </div>
+        <br />
+        <div class="form-group" style="text-align:center">
+          <button type="submit" [disabled]="!loginForm.valid" class="button"> Sign In</button>
+        </div>
+      </div>
+      <div>
+        <div *ngIf="showMsgDiv" style="color:green;text-align:center">
+          <br />
+          {{msg}}
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
