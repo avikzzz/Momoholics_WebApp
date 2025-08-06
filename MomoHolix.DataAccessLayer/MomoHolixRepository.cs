@@ -3,6 +3,8 @@ using System.Linq;
 using System.Collections.Generic;
 using MomoHolix.DataAccessLayer.Models;
 using System.Text;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace MomoHolix.DataAccessLayer
 {
@@ -84,10 +86,11 @@ namespace MomoHolix.DataAccessLayer
         // ETA USER VALIDAAATIOOOON //
 
 
-        public string ValidateLogin(string emailId, string password)
+        public (string StatusMessage, decimal UserId) ValidateLogin(string emailId, string password)
         {
 
             string statusMessage = "";
+            decimal userId = 0;
             try
             {
                 var objUser = (from user in context.Customer
@@ -97,6 +100,8 @@ namespace MomoHolix.DataAccessLayer
                 if (objUser!=null)
                 {
                     statusMessage = "Validated Successfully";
+                    userId= objUser.CustId;
+                    
                 }
                 else
                 {
@@ -109,7 +114,9 @@ namespace MomoHolix.DataAccessLayer
             {
                 statusMessage = "Invalid credentials";
             }
-            return statusMessage;
+            return (statusMessage,userId);
+            
+             
         }
 
         // ETA REGISTER USER //
@@ -134,6 +141,9 @@ namespace MomoHolix.DataAccessLayer
             }
 
             return status;
+
+
+            
         }
         
         public bool UpdateBalanceinCustomer(decimal cust_id, decimal amount)
@@ -163,6 +173,43 @@ namespace MomoHolix.DataAccessLayer
 
             return status;
         }
+
+        public List<Cart> GetCart(decimal custId)
+        {
+
+            var cartList = (from cart in context.Cart
+                            where cart.CustId == custId
+            
+                            select cart).ToList();
+            
+            return cartList;
+        }
+
+
+        public bool AddtoCart(decimal custId, string menuId)
+        {
+            try
+            {
+                var result = context.Database.ExecuteSqlRaw(
+
+                    "EXEC dbo.msp_AddToCart @p0, @p1",
+                    custId, menuId);
+
+                if (result == 1)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+
+            return false;
+        }
+
+
        
     }
 }

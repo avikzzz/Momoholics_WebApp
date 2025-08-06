@@ -51,7 +51,7 @@ namespace MomoHolixServices.Controllers
                 }
                 else
                 {
-                    message = "Nehi hua, firse kar !!!";
+                    message = "Nehi hua, firse karo !!!";
                 }
             }
             catch (Exception)
@@ -81,16 +81,18 @@ namespace MomoHolixServices.Controllers
         public JsonResult ValidateUserCredentials(Customer customer)
         {
             
-            string message;
+            string message="";
+            decimal userId = 0;
             try
             {
-                message = repository.ValidateLogin(customer.EmailId,customer.Password);
+                (message,userId) = repository.ValidateLogin(customer.EmailId,customer.Password);
             }
             catch(Exception ex)
             {
                 message = "OOPPSSSS... Something went wrong yaaar !!";
             }
-            return Json(message);
+            return Json(new { userId = userId, message = message });
+
         }
 
         /*
