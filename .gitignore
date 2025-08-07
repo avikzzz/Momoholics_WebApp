@@ -1,0 +1,73 @@
+# =====================================
+# .gitignore for .NET Core + Angular
+# =====================================
+
+# === .NET Core ===
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.app
+*.cache
+*.log
+*.vspscc
+*.vssscc
+*.user
+*.suo
+*.csproj.user
+*.dbmdl
+*.DS_Store
+
+# === ASP.NET Publish Folders ===
+wwwroot/dist/
+publish/
+*.Publish.xml
+
+# === Angular Frontend ===
+node_modules/
+dist/
+tmp/
+out-tsc/
+.angular/
+
+# === Environment and Sensitive Files ===
+.env
+.env.* 
+*.secret.*
+secrets/
+*.key
+*.pem
+
+# === Visual Studio ===
+.vs/
+.vscode/
+*.code-workspace
+
+# === System Files ===
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+.DS_Store
+
+# === Logs and Temp ===
+*.log
+*.bak
+*.tmp
+
+# === NPM Logs ===
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# === Package Lock ===
+package-lock.json
+yarn.lock
+
+# === Others (optional) ===
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
